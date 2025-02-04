@@ -10,4 +10,12 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'marika';
+
+  isMazePage = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.isMazePage = this.router.url.includes('/maze');
+    });
+  }
 }
