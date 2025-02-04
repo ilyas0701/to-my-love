@@ -6,6 +6,8 @@
     overflow-x: hidden;
     height: -webkit-fill-available;
     overflow: hidden;
+    position: fixed;
+    width: -webkit-fill-available;
 
     .circle-container {
         position: fixed;
