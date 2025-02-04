@@ -5,6 +5,10 @@ html, body {
   overflow: hidden;
   position: fixed;
   background: #ecbcd4;
+}
+
+body.no-refresh{
   overscroll-behavior: contain;
 }
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
