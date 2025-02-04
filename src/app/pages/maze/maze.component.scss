@@ -47,6 +47,7 @@ table {
     border-radius: 10px;
     scale: 0;
     animation: scale forwards 1s;
+    max-height: 270px;
 
     p{
         text-wrap: wrap;
