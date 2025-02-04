@@ -1,0 +1,72 @@
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+  
+  td {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+  }
+  
+  .wall {
+    background-color: #8e616d;
+  }
+  
+  .path{
+    background-color: #C797A4;
+  }
+
+  .finish {
+    background-color: #603940;
+  }
+
+  .player {
+    background-color: #C797A4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    }
+  }
+
+  .win-message{
+    position: absolute;
+    background: #603940;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    max-width: 270px;
+    border-radius: 10px;
+    scale: 0;
+    animation: scale forwards 1s;
+
+    p{
+        text-wrap: wrap;
+        height: min-content;
+        text-align: center;
+        margin: 0;
+        color: #ecbcd4;
+    }
+
+    img{
+        width: 200px;
+        height: 200px;
+    }
+  }
+
+  @keyframes scale {
+    0%{
+        scale: 0;
+    }
+    100%{
+        scale: 1;
+    }
+  }

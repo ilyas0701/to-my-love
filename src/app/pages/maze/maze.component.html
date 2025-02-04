@@ -1,0 +1,25 @@
+@if (gameWon) {
+    <div class="win-message">
+        <p>Вітаю! Ти виграла похід на суші зі мною😘😘😘</p>
+        <img src="/assets/img/cat.png" alt="">
+    </div>
+}
+
+<table>
+    @for (row of maze; let rowIndex = $index; track rowIndex) { 
+      <tr>
+        @for (cell of row; let colIndex = $index; track colIndex) { 
+          <td 
+            [class.wall]="cell === 1" 
+            [class.path]="cell === 0"
+            [class.finish]="cell === 2"  
+            [class.player]="rowIndex === playerY && colIndex === playerX">
+                @if (rowIndex === playerY && colIndex === playerX) {
+                    <img src="/assets/img/img-yes/2.png" alt="">
+                }
+          </td>
+        }
+      </tr>
+    }
+  </table>
+  

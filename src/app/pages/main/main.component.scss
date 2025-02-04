@@ -1,0 +1,113 @@
+.main{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    overflow-x: hidden;
+
+    .hearts-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+    .heart {
+        position: absolute;
+        width: 50px;
+        height: 20px;
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-image: url('/assets/img/heart-png.png');
+        animation: fall 3s linear infinite;
+        z-index: 1;
+    }
+
+    .panel-poem{
+        display: flex;
+        flex-flow: column;
+        gap: 30px;
+        background: rgb(96, 57, 64, 0.7);
+        width: fit-content;
+        border-radius: 12px;
+        padding: 20px 30px;
+        position: relative;
+        z-index: 5;
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+        .poem{
+            display: flex;
+            flex-flow: column;
+            gap: 0px;
+
+            p{
+                color: #ecbcd4;
+            }
+        }
+    }
+
+    .buttons{
+        position: relative;
+        width: 375px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            padding: 10px 0;
+            width: 70px;
+            cursor: pointer;
+
+            background: #603940;
+            border: 0;
+            border-radius: 12px;
+            color: #ecbcd4;
+            font-size: 20px;
+            font-weight: 700;
+
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            
+
+            img{
+                width: 40px;
+                position: absolute;
+                left: 14px;
+                top: -20px;
+            }
+        }
+    }
+    
+    .btn-one{
+        position: absolute;
+        left: 25%;
+    }    
+
+    #no-button {
+        right: 25%;
+        position: absolute; 
+        background: #fd0006;
+    }
+}
+
+@keyframes fall {
+    0% {
+      transform: translateY(-100px) scale(0.8) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) scale(1.2) rotate(360deg);
+      opacity: 0;
+    }
+}
