@@ -1,7 +1,8 @@
 import { commonImports } from '../../app.imports';
-import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import * as confetti from 'canvas-confetti';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-answer',
@@ -10,23 +11,32 @@ import * as confetti from 'canvas-confetti';
   templateUrl: './answer.component.html',
   styleUrl: './answer.component.scss'
 })
-export class AnswerComponent implements OnInit, AfterViewInit {
+export class AnswerComponent implements OnInit {
   countClick: number = 1;
 
   imgs: string[] = ["1.jpg", "2.png", "3.png", "4.png", "5.png"];
+
+  private confetti: any; 
   
-  constructor(private renderer: Renderer2, private router: Router) {}
+  constructor(
+    private renderer: Renderer2, 
+    private router: Router, 
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
   
   ngOnInit(): void {
-    this.celebrate();
-    this.startFallingHearts();
-  }
+    if (isPlatformBrowser(this.platformId)) {
+      import('canvas-confetti').then((module) => {
+        this.confetti = module.default;
+        this.celebrate();
+      });
 
-  ngAfterViewInit(): void {
-    this.setupVideoListener();
+      this.startFallingHearts();
+    }
   }
   
   startFallingHearts(): void {
+      if (!isPlatformBrowser(this.platformId)) return;
       const container = document.querySelector('.circle-container');
       if (!container) return;
   
@@ -58,35 +68,15 @@ export class AnswerComponent implements OnInit, AfterViewInit {
   }
 
   celebrate() {
-    const duration = 5000;
+    if (!this.confetti) return;
 
-      confetti.default({
+    const duration = 5000;
+    this.confetti({
       particleCount: 100,
       spread: 160,
       origin: { y: 0.6 },
     });
 
-    setTimeout(() => confetti.reset(), duration);
+    setTimeout(() => {}, duration);
   }
-
-  setupVideoListener(): void {
-    const video = document.getElementById("loveVideo") as HTMLVideoElement;
-    const button = document.getElementById("giftButton") as HTMLButtonElement;
-
-    if (!video || !button) return;
-
-    video.addEventListener("timeupdate", () => {
-      const percentWatched = (video.currentTime / video.duration) * 100;
-
-      if (percentWatched >= 99) {
-        button.style.display = "block";
-      }
-    });
-
-    button.addEventListener("click", () => {
-      alert("🎁 Твой сюрприз: Купон на поход в суши-бар!");
-      window.location.href = "your-coupon-link.html";
-    });
-  }
-  
 }

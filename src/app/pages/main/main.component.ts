@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { commonImports } from '../../app.imports';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -13,13 +15,19 @@ export class MainComponent implements OnInit{
 
   countClick: number = 1;
 
-  constructor(private renderer: Renderer2, private router: Router) {}
+  constructor(
+    private renderer: Renderer2, 
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   ngOnInit(): void {
     this.startFallingHearts();
   }
 
   startFallingHearts(): void {
+
+    if (!isPlatformBrowser(this.platformId)) return;
     const container = document.querySelector('.hearts-container');
     if (!container) return;
 
@@ -44,6 +52,7 @@ export class MainComponent implements OnInit{
   }
 
   moveButton(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     const container = document.querySelector('.buttons') as HTMLElement;
     const button = document.getElementById('no-button') as HTMLElement;
 
